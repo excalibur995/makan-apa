@@ -1,9 +1,11 @@
-import "../styles/globals.css";
+import Layout from "layout/Layout";
+import Seo from "layout/Seo";
 import { useState } from "react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import { AppProps } from "next/app";
 import { trpc } from "../utils/trpc";
+import "styles/globals.css";
 
 function MyApp({
   Component,
@@ -18,7 +20,11 @@ function MyApp({
       supabaseClient={supabase}
       initialSession={pageProps.initialSession}
     >
-      <Component {...pageProps} />
+      <Seo>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Seo>
     </SessionContextProvider>
   );
 }
